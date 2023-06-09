@@ -13,3 +13,6 @@ def factorial(n):
 
 n = int(input('Escribe un entero: '))
 print(factorial(n))
+
+if __name__ == "__main__":
+    factorial()
