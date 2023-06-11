@@ -21,7 +21,7 @@ if __name__ == '__main__':
     list_size = int(input('De que tamaño es la lista?\n'))
     target = int(input('Que numero quieres encontrar?\n'))
     
-    list = sorted([random.randint(0, 100) for i in range(list_size)])
+    list = sorted([random.randint(0, 1000000) for i in range(list_size)])
     
     counter_iterations = 0
     found, counter_iterations = busqueda_binaria_r(list, 0, len(list), target, counter_iterations)
