@@ -17,8 +17,7 @@ def busqueda_lineal(list, target):
 def busqueda_binaria_r(list, start, end, target, counter):
     if target in list:
         counter +=1
-        #print(f'Paso #{counter}')
-        #print(f'buscando {target} entre {list[start]} y {list[end-1]}')
+        
         if start > end:
             return False, counter
         
@@ -38,38 +37,46 @@ def busqueda_binaria_r(list, start, end, target, counter):
 
 
 if __name__ == '__main__':
-    list_size = int(input('De que tamaño sera la lista?\n'))
-    target = int(input('Que numero quieres encontrar?\n'))
-
-    list_l = [random.randint(0, 10) for i in range(list_size)]
-    list_b_r = sorted([random.randint(0, 10) for i in range(list_size)])
     
-    if target in list_l and target in list_b_r:
-
-        counter_iterations = 0
-        found_l, counter_iterations_l = busqueda_lineal(list_l, target)
-        found_b_r, counter_iterations_b_r = busqueda_binaria_r(list_b_r, 0, len(list_b_r), target, counter_iterations)
-
-        print(f'{list_l}\n {list_b_r}')
+    list_size = int(input('De qué tamaño será la lista?\n'))
+    target = int(input('Qué número quieres encontrar?\n'))
+    
+    while True:
+        print(f'\nTamaño de la lista actual: {list_size}\nTarget actual: {target}')
+        print('¿Qué deseas hacer?')
+        print('1. Cambiar el objetivo')
+        print('2. Cambiar el tamaño de la lista')
+        print('3. Ejecutar la búsqueda con los datos actuales')
+        print('4. Salir')
+        choice = int(input('> '))
         
-        print(f'\nUsando Busqueda Lineal\nEl elemento {target} {"esta" if found_l else "no esta"} en la lista')
-        print(f'Se realizaron {counter_iterations_l} pasos')
+        if choice == 1:
+            target = int(input('Escoge un nuevo objetivo:\n'))
+            
+        elif choice == 2:
+            list_size = int(input('Escoge un nuevo tamaño para la lista:\n'))
+            
+        elif choice == 3:
+            while True:
+                list_l = [random.randint(0, 1000000) for i in range(list_size)]
+                list_b_r = sorted([random.randint(0, 1000000) for i in range(list_size)])
+                if target in list_l and target in list_b_r:
+                    break
 
-        print(f'\nUsando Busqueda Binaria Recursiva\nEl elemento {target} {"esta" if found_b_r else "no esta"} en la lista')
-        print(f'Se realizaron {counter_iterations_b_r} pasos')
-    
-    else:
-        print('\nEl objetivo no se encuentra en las dos listas\nReintentelo de nuevo')
-        target = int(input('\nQue numero quieres encontrar?\n'))
-        counter_iterations = 0
-        found_l, counter_iterations_l = busqueda_lineal(list_l, target)
-        found_b_r, counter_iterations_b_r = busqueda_binaria_r(list_b_r, 0, len(list_b_r), target, counter_iterations)
-
-        print(f'{list_l}\n{list_b_r}')
+            counter_iterations = 0
+            _, counter_iterations_l = busqueda_lineal(list_l, target)
+            _, counter_iterations_b_r = busqueda_binaria_r(list_b_r, 0, len(list_b_r), target, 0)
+            
+            #print(f'\n{list_l}')
+            print(f'Usando Búsqueda Lineal\nTarget: {target}\nSe realizaron {counter_iterations_l} pasos')
+            #print(f'\n{list_b_r}')
+            print(f'Usando Búsqueda Binaria Recursiva\nTarget: {target}\nSe realizaron {counter_iterations_b_r} pasos')
+            continue
         
-        print(f'\nUsando Busqueda Lineal\nEl elemento {target} {"esta" if found_l else "no esta"} en la lista')
-        print(f'Se realizaron {counter_iterations_l} pasos')
-
-        print(f'\nUsando Busqueda Binaria Recursiva\nEl elemento {target} {"esta" if found_b_r else "no esta"} en la lista')
-        print(f'Se realizaron {counter_iterations_b_r} pasos')
-    
+        elif choice == 4:
+            print('¡Hasta luego!')
+            break
+        
+        else:
+            print('Opción inválida. Inténtalo de nuevo.')
+            continue
